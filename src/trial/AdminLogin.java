@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//This is admin login page
 public class AdminLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID=1L;
 
