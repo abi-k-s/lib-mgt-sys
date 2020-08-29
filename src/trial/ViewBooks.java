@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-/*This class shows Book details in tabular form
+/*This class shows, Book details in tabular form
  * */
 public class ViewBooks {
 
