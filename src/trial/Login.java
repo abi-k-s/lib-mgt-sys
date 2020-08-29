@@ -2,18 +2,20 @@ package trial;
 
 import javax.swing.*;
 import java.awt.event.*;
-
+/*This class is the main function for this application and should be called first
+*/
 public class Login extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	JButton adm, lib;
 
 	Login() {
-
+		// Create  button for admin and action Listener
 		adm = new JButton("ADMIN");
 		adm.setBounds(180, 150, 100, 30);
 		add(adm);
 		adm.addActionListener(this);
+		//Create button for Librarian and action Listener
 		lib = new JButton("LIBRARIAN");
 		lib.setBounds(180, 200, 100, 30);
 		add(lib);
@@ -24,12 +26,14 @@ public class Login extends JFrame implements ActionListener {
 		setVisible(true);
 
 	}
-
+     //Fuction for action performed
 	public void actionPerformed(ActionEvent e) {
+		//cheking whether admin button is clicked ...if it is clicked then admin login page will be loaded
 		if (e.getSource() == adm) {
 			AdminLogin.main(new String[] {});
 			dispose();
 		}
+		//Checking whether Librarian button is clicked ....if it is clicked then librarian login page will be loaded
 		if (e.getSource() == lib) {
 			LibrarianLogin.main(new String[] {});
 			dispose();
