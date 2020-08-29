@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+/*This class add books with seral no ,name ,author ,publisher ,quantity
+ * */
 
 public class AddBooks extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -16,64 +17,83 @@ public class AddBooks extends JFrame implements ActionListener {
 
 	AddBooks() {
 		f = new JFrame("Add Books");
+		//Create label serial no
 		s = new JLabel("Serial No");
-		n = new JLabel("Name");
-		a = new JLabel("Author");
-		p = new JLabel("Publisher");
-		q = new JLabel("Quantity");
-		add = new JButton("Add books");
-		back = new JButton("Back");
-
-		s1 = new JTextField();
-		n1 = new JTextField();
-		a1 = new JTextField();
-		p1 = new JTextField();
-		q1 = new JTextField();
-
 		s.setBounds(100, 100, 100, 20);
-		n.setBounds(100, 150, 100, 20);
-		a.setBounds(100, 200, 100, 20);
-		p.setBounds(100, 250, 100, 20);
-		q.setBounds(100, 300, 100, 20);
-
-		s1.setBounds(250, 100, 100, 20);
-		n1.setBounds(250, 150, 100, 20);
-		a1.setBounds(250, 200, 100, 20);
-		p1.setBounds(250, 250, 100, 20);
-		q1.setBounds(250, 300, 100, 20);
-
-		add.setBounds(180, 350, 150, 30);
-		back.setBounds(300, 400, 100, 30);
-
 		f.add(s);
+		
+		//Create label name
+		n = new JLabel("Name");
+		n.setBounds(100, 150, 100, 20);
 		f.add(n);
+		
+		//Create label author
+		a = new JLabel("Author");
+		a.setBounds(100, 200, 100, 20);
 		f.add(a);
-		f.add(p);
-		f.add(q);
-		f.add(s1);
-		f.add(n1);
-		f.add(a1);
-		f.add(p1);
-		f.add(q1);
-		f.add(add);
-		f.add(back);
 
+		//Create label publisher
+		p = new JLabel("Publisher");
+		p.setBounds(100, 250, 100, 20);
+		f.add(p);
+
+		//Create label quantity
+		q = new JLabel("Quantity");
+		q.setBounds(100, 300, 100, 20);
+		f.add(q);
+
+        //Create button add books and action listener
+		add = new JButton("Add books");
+		add.setBounds(180, 350, 150, 30);
+		f.add(add);
 		add.addActionListener(this);
+		
+		//Create button for moving back....that is moving to Librarian section..
+		back = new JButton("Back");
+		back.setBounds(300, 400, 100, 30);
+		f.add(back);
 		back.addActionListener(this);
+
+        //Creates textfields
+		s1 = new JTextField();
+		s1.setBounds(250, 100, 100, 20);
+		f.add(s1);
+
+		n1 = new JTextField();
+		n1.setBounds(250, 150, 100, 20);
+		f.add(n1);
+
+		a1 = new JTextField();
+		a1.setBounds(250, 200, 100, 20);
+		f.add(a1);
+
+		p1 = new JTextField();
+		p1.setBounds(250, 250, 100, 20);
+		f.add(p1);
+
+		q1 = new JTextField();
+		q1.setBounds(250, 300, 100, 20);
+		f.add(q1);
+
 		f.setSize(500, 500);
 		f.setLayout(null);
 		f.setVisible(true);
 
 	}
-
+    //Function for action performed
 	public void actionPerformed(ActionEvent e) {
+		
+		//Checking whether add button is clicked....
 		if (e.getSource() == add) {
+			
+			//Checking whether if any of the textfield is empty if so a message dialogue box will appear...
 			if(s1.getText().equals("")||n1.getText().equals("")||a1.getText().equals("")|| p1.getText().equals("")) {
 				JOptionPane.showMessageDialog(this, "Something went wrong..Fill all fileds");
 				AddBooks.main(new String[] {});
 				f.dispose();
 
 			}
+			//Store values to varibles
 			String sl=String.valueOf(s1.getText());
 			int sl1=Integer.parseInt(sl);
 			String nl=n1.getText();
@@ -85,7 +105,10 @@ public class AddBooks extends JFrame implements ActionListener {
 			
 			try {
 				
-				Connection con=MYSQL.getConnection();
+				//Create the connection object and call the Db connection 
+				Connection con=Db.getConnection();
+				
+				//Create prepared statement for inserting data to the database
 				PreparedStatement ps=con.prepareStatement("insert into books(slno,name,author,publisher,quantity) values(?,?,?,?,?)"); 
 				
 				ps.setInt(1,sl1);
@@ -111,6 +134,8 @@ public class AddBooks extends JFrame implements ActionListener {
 
 
 		}
+		
+		//Check whether back button is clicked ...if so move back to Librarian section
 		if (e.getSource() == back) {
 			LibSection.main(new String[] {});
 			f.dispose();

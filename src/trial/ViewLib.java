@@ -8,7 +8,8 @@ import java.sql.ResultSetMetaData;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
+/*This class shows Librarian details in tabular form
+ * */
 public class ViewLib extends JFrame {
 	private static final long serialVersionUID=1L;
 
@@ -18,13 +19,16 @@ public class ViewLib extends JFrame {
 		String data[][] = null;
 		String column[] = null;
 		try {
-			Connection con = MYSQL.getConnection();
+			//Create the connection object and call the Db connection 
+			Connection con = Db.getConnection();
+			
+			//Create prepared statement for selecting data from database with table named librarian
 			PreparedStatement ps = con.prepareStatement("select * from librarian", ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = ps.executeQuery();
 
 			ResultSetMetaData rsmd = rs.getMetaData();
-			int cols = rsmd.getColumnCount();
+			int cols = rsmd.getColumnCount();//Gets column count
 			column = new String[cols];
 			for (int i = 1; i <= cols; i++) {
 				column[i - 1] = rsmd.getColumnName(i);

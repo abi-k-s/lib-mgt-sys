@@ -2,7 +2,7 @@ package trial;
 
 import java.sql.*;
 
-public class MYSQL {
+public class Db {
 	public static Connection getConnection() {
 		Connection con = null;
 		try {
